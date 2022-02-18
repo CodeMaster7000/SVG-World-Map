@@ -1,0 +1,60 @@
+*, *::before, *::after {
+	box-sizing:border-box;
+}
+
+$sea:#368CBF;
+
+body {
+	display:flex;
+	min-height:100vh;
+	background:$sea;
+	background:radial-gradient(circle at center, $sea, darken($sea, 30%));
+	padding: 0;
+	margin: 0;
+}
+
+svg {
+	display:block;
+	width:100%;
+	height:auto;
+	max-height:100vh;
+	display:block;
+	margin: auto;
+}
+
+path {
+	$fill:#f2f2f2;
+	fill-rule:evenodd; fill:$fill;
+	transition:fill 180ms;
+	cursor:pointer;
+	&.selected, &:hover {
+		$fillSelected:#E5BD47;
+		fill:$fillSelected;
+	}
+}
+
+.toast {
+	cursor:pointer;
+	font-size:0.95em;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	position:fixed;
+	bottom:1.5em;
+	right:2em;
+	background:whitesmoke;
+	color:darken($sea, 20%);
+	padding:10px 16px;
+	animation: toastEnter 0.3s ease-out both;
+	&.leave {
+		animation: toastLeave 0.3s cubic-bezier(.71,-0.70,.54,.93) both;
+	}
+}
+
+@keyframes toastEnter {
+	from { opacity:0; transform: perspective(200) translate3d(0,50px, -50px); }
+	to { opacity:1; transform: perspective(200) translate3d(0, 0, 0) }
+}
+
+@keyframes toastLeave {
+	to { opacity:0; transform: perspective(200) translate3d(0,-20px, 100px); }
+}
